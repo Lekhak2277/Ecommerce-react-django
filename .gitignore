@@ -1,0 +1,38 @@
+# ───── PYTHON / DJANGO ─────
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.sqlite3          # local DB — don't push
+backend/media/     # uploaded images
+.env               # SECRET KEYS!
+*.log
+
+# ───── NODE / REACT ─────
+frontend/node_modules/   # NEVER push this (huge!)
+frontend/build/          # production build output
+frontend/.env
+frontend/.env.local
+frontend/.env.production
+
+# ───── IDE / OS ─────
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+```
+
+---
+
+## 🔐 Step 4: Environment Variables (Never Push These!)
+
+**`backend/.env`** (create this, never commit it):
+```
+SECRET_KEY=your-django-secret-key-here
+DEBUG=True
+DATABASE_URL=sqlite:///db.sqlite3
