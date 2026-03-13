@@ -40,11 +40,13 @@ INSTALLED_APPS = [
 
 
     'rest_framework',
-    'corsheader',
+    'corsheaders',
     'store',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -53,7 +55,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -143,3 +144,30 @@ REST_FRAMEWORK = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+
+
+import os
+from pathlib import Path
+from pymongo import MongoClient
+from dotenv import load_dotenv
+
+# Load environment variables from .env
+load_dotenv()
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Django settings
+DEBUG = os.environ.get("DEBUG", "False") == "True"
+SECRET_KEY = os.environ.get("SECRET_KEY", "fallback_secret_key")
+
+# MongoDB settings
+MONGO_DB_NAME = os.environ.get("MONGO_DB_NAME", "Project_Ecommerce")
+MONGO_URI = os.environ.get("MONGO_URI", f"mongodb://localhost:27017/{MONGO_DB_NAME}")
+
+# Initialize MongoDB client
+mongo_client = MongoClient(MONGO_URI)
+mongo_db = mongo_client[MONGO_DB_NAME]
+
+# Example: Access a collection
+# products_collection = mongo_db["products"]

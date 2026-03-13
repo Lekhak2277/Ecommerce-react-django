@@ -10,7 +10,8 @@ dist/
 build/
 *.sqlite3          # local DB — don't push
 backend/media/     # uploaded images
-.env               # SECRET KEYS!
+.env
+backend/.env               # SECRET KEYS!
 *.log
 
 # ───── NODE / REACT ─────
